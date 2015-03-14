@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E310DA4F1AB47A8B00F7034A /* HTMLNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = E310DA4B1AB47A8B00F7034A /* HTMLNode.swift */; };
+		E310DA501AB47A8B00F7034A /* HTMLParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = E310DA4C1AB47A8B00F7034A /* HTMLParser.swift */; };
+		E310DA511AB47A8B00F7034A /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = E310DA4D1AB47A8B00F7034A /* main.swift */; };
 		E33D6C8A1AB0960800D7A366 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E33D6C891AB0960800D7A366 /* AppDelegate.swift */; };
 		E33D6C8C1AB0960800D7A366 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E33D6C8B1AB0960800D7A366 /* FirstViewController.swift */; };
 		E33D6C8E1AB0960800D7A366 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E33D6C8D1AB0960800D7A366 /* SecondViewController.swift */; };
@@ -27,6 +30,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E310DA4B1AB47A8B00F7034A /* HTMLNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTMLNode.swift; sourceTree = "<group>"; };
+		E310DA4C1AB47A8B00F7034A /* HTMLParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTMLParser.swift; sourceTree = "<group>"; };
+		E310DA4D1AB47A8B00F7034A /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		E310DA4E1AB47A8B00F7034A /* Swift-HTML-Parser-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Swift-HTML-Parser-Bridging-Header.h"; sourceTree = "<group>"; };
 		E33D6C841AB0960800D7A366 /* AntiSpamForTwitter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AntiSpamForTwitter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E33D6C881AB0960800D7A366 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E33D6C891AB0960800D7A366 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -58,9 +65,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E310DA4A1AB47A8B00F7034A /* Swift-HTML-Parser */ = {
+			isa = PBXGroup;
+			children = (
+				E310DA4B1AB47A8B00F7034A /* HTMLNode.swift */,
+				E310DA4C1AB47A8B00F7034A /* HTMLParser.swift */,
+				E310DA4D1AB47A8B00F7034A /* main.swift */,
+				E310DA4E1AB47A8B00F7034A /* Swift-HTML-Parser-Bridging-Header.h */,
+			);
+			path = "Swift-HTML-Parser";
+			sourceTree = "<group>";
+		};
 		E33D6C7B1AB0960800D7A366 = {
 			isa = PBXGroup;
 			children = (
+				E310DA4A1AB47A8B00F7034A /* Swift-HTML-Parser */,
 				E33D6C861AB0960800D7A366 /* AntiSpamForTwitter */,
 				E33D6C9E1AB0960800D7A366 /* AntiSpamForTwitterTests */,
 				E33D6C851AB0960800D7A366 /* Products */,
@@ -215,9 +234,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E310DA4F1AB47A8B00F7034A /* HTMLNode.swift in Sources */,
 				E33D6C8E1AB0960800D7A366 /* SecondViewController.swift in Sources */,
+				E310DA511AB47A8B00F7034A /* main.swift in Sources */,
 				E33D6C8A1AB0960800D7A366 /* AppDelegate.swift in Sources */,
 				E33D6C8C1AB0960800D7A366 /* FirstViewController.swift in Sources */,
+				E310DA501AB47A8B00F7034A /* HTMLParser.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -409,6 +431,7 @@
 				E33D6CA71AB0960800D7A366 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E33D6CA81AB0960800D7A366 /* Build configuration list for PBXNativeTarget "AntiSpamForTwitterTests" */ = {
 			isa = XCConfigurationList;
@@ -417,6 +440,7 @@
 				E33D6CAA1AB0960800D7A366 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
