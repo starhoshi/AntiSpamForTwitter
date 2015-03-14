@@ -53,6 +53,9 @@ class FirstViewController: UIViewController,UIWebViewDelegate {
     func webViewDidFinishLoad(webView: UIWebView!) {
         println("webViewDidFinishLoad")
         println(webView.request?.URL)
+        let js = "document.body.innerHTML"
+        let body = webView.stringByEvaluatingJavaScriptFromString(js)
+        parseHtml(body!)
     }
 
     // ログアウト
@@ -66,6 +69,31 @@ class FirstViewController: UIViewController,UIWebViewDelegate {
     func webViewDidStartLoad(webView: UIWebView!) {
         println("webViewDidStartLoad")
         println(webView.request?.URL)
+
+    }
+
+    /**
+    TwitterのHTMLをParseする
+
+    :param: html <#html description#>
+    */
+    func parseHtml(html: String){
+        var err : NSError?
+        let option = CInt(HTML_PARSE_NOERROR.value | HTML_PARSE_RECOVER.value)
+        var parser     = HTMLParser(html: html, encoding: NSUTF8StringEncoding, option: option, error: &err)
+        if err != nil {
+            println(err)
+            exit(1)
+        }
+
+        var bodyNode   = parser.body
+
+        if let path = bodyNode?.xpath("//div[@class='stream-item oauth-application ']") {
+            for node in path {
+                println(node.findChildTag("strong")?.contents as String!)
+            }
+        }
+
     }
 
 }
