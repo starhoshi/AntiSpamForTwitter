@@ -68,7 +68,6 @@ class FirstViewController: UIViewController,UIWebViewDelegate {
         println(webView.request?.URL)
     }
 
-
 }
 
 
