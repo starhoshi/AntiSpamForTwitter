@@ -4,6 +4,40 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
     </dependencies>
     <scenes>
+        <!--Item-->
+        <scene sceneID="vWU-dh-shR">
+            <objects>
+                <navigationController id="pyq-dc-S5H" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="6rR-hu-o74"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Pfd-sG-RH5">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="8rJ-Kc-sve" kind="relationship" relationship="rootViewController" id="Ca0-xk-Dva"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oFK-qe-6Vt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="76" y="360"/>
+        </scene>
+        <!--Item-->
+        <scene sceneID="sRB-jJ-yd4">
+            <objects>
+                <navigationController id="jvg-mW-Ug3" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="qu3-Oe-Owb"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="vuL-cw-DmU">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="9pv-A4-QxB" kind="relationship" relationship="rootViewController" id="Hdk-sb-BJU"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="A3y-Vb-EJc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="76" y="-320"/>
+        </scene>
         <!--First-->
         <scene sceneID="hNz-n2-bh7">
             <objects>
@@ -14,6 +48,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </webView>
                     <tabBarItem key="tabBarItem" title="First" image="first" id="acW-dT-cKf"/>
+                    <navigationItem key="navigationItem" id="iu8-Yx-cz2"/>
                     <connections>
                         <outlet property="twitterWebView" destination="Yed-TM-142" id="MCY-zK-ZsR"/>
                     </connections>
@@ -57,6 +92,7 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Second" image="second" id="cPa-gy-q4n"/>
+                    <navigationItem key="navigationItem" id="peB-ML-kdq"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
             </objects>
@@ -73,13 +109,13 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="9pv-A4-QxB" kind="relationship" relationship="viewControllers" id="u7Y-xg-7CH"/>
-                        <segue destination="8rJ-Kc-sve" kind="relationship" relationship="viewControllers" id="lzU-1b-eKA"/>
+                        <segue destination="jvg-mW-Ug3" kind="relationship" relationship="viewControllers" id="j5y-2u-Hxv"/>
+                        <segue destination="pyq-dc-S5H" kind="relationship" relationship="viewControllers" id="a4s-aW-JIq"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="0.0" y="0.0"/>
+            <point key="canvasLocation" x="-618" y="20"/>
         </scene>
     </scenes>
     <resources>
