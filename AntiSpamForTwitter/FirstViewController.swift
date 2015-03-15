@@ -13,6 +13,7 @@ class FirstViewController: UIViewController,UIWebViewDelegate {
 
     let PC_CHROME_UA = "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/28.0.1500.63 Safari/537.36"
     var defalutUA:String!
+    var application:[[String:Any]] = [[:]]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -87,12 +88,32 @@ class FirstViewController: UIViewController,UIWebViewDelegate {
         }
 
         var bodyNode   = parser.body
+        var applicationDetail = [String:Any]()
+        var metadata: String
+        application = [[:]]
 
         if let path = bodyNode?.xpath("//div[@class='stream-item oauth-application ']") {
             for node in path {
-                println(node.findChildTag("strong")?.contents as String!)
+                applicationDetail["name"] = node.findChildTag("strong")?.contents as String!
+                applicationDetail["button_id"] = node.findChildTag("button")?.getAttributeNamed("id")
+                applicationDetail["image"] = node.findChildTag("img")?.getAttributeNamed("src")
+                applicationDetail["creater"] = node.findChildTagAttr("a", attrName: "class", attrValue: "oauth-organization")?.contents as String!
+                applicationDetail["creater_href"] = node.findChildTagAttr("a", attrName: "class", attrValue: "oauth-organization")?.getAttributeNamed("href")
+                applicationDetail["description"] = node.findChildTagAttr("p", attrName: "class", attrValue: "description")?.contents as String!
+                applicationDetail["allow_date"] = node.findChildTagsAttr("small", attrName: "class", attrValue: "metadata")[1].contents as String!
+
+                metadata = node.findChildTagsAttr("small", attrName: "class", attrValue: "metadata")[0].contents as String!
+                applicationDetail["read"] = metadata.rangeOfString("読み")?.startIndex
+                applicationDetail["write"] = metadata.rangeOfString("書き")?.startIndex
+                applicationDetail["dm"] = metadata.rangeOfString("ダイレクトメッセージ")?.startIndex
+                application.append(applicationDetail)
             }
         }
+        println(application)
+//        let button_id = application[5]["button_id"] as String!
+//        println(button_id)
+//        let logoutId = "document.getElementById('\(button_id)').click();"
+//        twitterWebView.stringByEvaluatingJavaScriptFromString(logoutId)
 
     }
 
