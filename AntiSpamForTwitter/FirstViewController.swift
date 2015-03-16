@@ -19,8 +19,8 @@ class FirstViewController: UIViewController,UIWebViewDelegate {
         super.viewDidLoad()
 
         defalutUA = getDefaultUA()
-        changeUserAgent()
-        loadTwitterWebView(TwitterUrls.APPLICATIONS.rawValue)
+        //        changeUserAgent()
+        loadTwitterWebView(TwitterUrls.LOGIN.rawValue)
     }
 
     override func didReceiveMemoryWarning() {
@@ -53,17 +53,34 @@ class FirstViewController: UIViewController,UIWebViewDelegate {
     // Pageがすべて読み込み終わった時呼ばれる
     func webViewDidFinishLoad(webView: UIWebView!) {
         println("webViewDidFinishLoad")
-        println(webView.request?.URL)
         let js = "document.body.innerHTML"
         let body = webView.stringByEvaluatingJavaScriptFromString(js)
         parseHtml(body!)
+        if let currentUrl = webView.request?.URL.absoluteString {
+            if currentUrl == TwitterUrls.INDEX.rawValue {
+                println("login true")
+            }else{
+                println("login false")
+            }
+        }
+        //                logoutTwitter()
     }
 
     // ログアウト
     func logoutTwitter(){
-        let myWebView : UIWebView = UIWebView()
         let logoutId = "document.getElementById('signout-button').click();"
-        myWebView.stringByEvaluatingJavaScriptFromString(logoutId)
+        twitterWebView.stringByEvaluatingJavaScriptFromString(logoutId)
+        var storage : NSHTTPCookieStorage = NSHTTPCookieStorage.sharedHTTPCookieStorage()
+        for cookie in storage.cookies  as [NSHTTPCookie]{
+            storage.deleteCookie(cookie)
+        }
+
+        NSUserDefaults.standardUserDefaults()
+        //        var cookie: NSHTTPCookie = NSHTTPCookie()
+        var cookieJar: NSHTTPCookieStorage = NSHTTPCookieStorage.sharedHTTPCookieStorage()
+        for cookie in cookieJar.cookies as [NSHTTPCookie]{
+            NSLog("%@", cookie)
+        }
     }
 
     // Pageがloadされ始めた時、呼ばれる
@@ -110,10 +127,10 @@ class FirstViewController: UIViewController,UIWebViewDelegate {
             }
         }
         println(application)
-//        let button_id = application[5]["button_id"] as String!
-//        println(button_id)
-//        let logoutId = "document.getElementById('\(button_id)').click();"
-//        twitterWebView.stringByEvaluatingJavaScriptFromString(logoutId)
+        //        let button_id = application[5]["button_id"] as String!
+        //        println(button_id)
+        //        let logoutId = "document.getElementById('\(button_id)').click();"
+        //        twitterWebView.stringByEvaluatingJavaScriptFromString(logoutId)
 
     }
 
@@ -121,7 +138,9 @@ class FirstViewController: UIViewController,UIWebViewDelegate {
 
 
 private enum TwitterUrls: String {
-    case LOGIN = "https://mobile.twitter.com/login"
-    case INDEX = "https://mobile.twitter.com"
-    case APPLICATIONS = "https://twitter.com/settings/applications"
+    case LOGIN = "https://mobile.twitter.com/login/"
+    case INDEX = "https://mobile.twitter.com/"
+    case LOGIN_PC = "https://twitter.com/login/"
+    case INDEX_PC = "https://twitter.com/"
+    case APPLICATIONS = "https://twitter.com/settings/applications/"
 }
