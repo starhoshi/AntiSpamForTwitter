@@ -44,7 +44,7 @@ class FirstViewController: UIViewController,UIWebViewDelegate {
 
     // webview load
     func loadTwitterWebView(loadUrl: String){
-        twitterWebView.delegate = self
+//        twitterWebView.delegate = self
         let url: NSURL = NSURL(string: loadUrl)!
         let request: NSURLRequest = NSURLRequest(URL: url)
         twitterWebView.loadRequest(request)
@@ -57,6 +57,7 @@ class FirstViewController: UIViewController,UIWebViewDelegate {
         let body = webView.stringByEvaluatingJavaScriptFromString(js)
         parseHtml(body!)
         if let currentUrl = webView.request?.URL.absoluteString {
+            println(currentUrl)
             if currentUrl == TwitterUrls.INDEX.rawValue {
                 println("login true")
             }else{
