@@ -9,7 +9,7 @@
 import UIKit
 
 class FirstViewController: UIViewController,UIWebViewDelegate {
-    @IBOutlet weak var twitterWebView: UIWebView!
+//    let twitterWebView : UIWebView = UIWebView()
 
     let PC_CHROME_UA = "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/28.0.1500.63 Safari/537.36"
     var defalutUA:String!
@@ -20,7 +20,12 @@ class FirstViewController: UIViewController,UIWebViewDelegate {
 
         defalutUA = getDefaultUA()
         //        changeUserAgent()
-        loadTwitterWebView(TwitterUrls.LOGIN.rawValue)
+//        loadTwitterWebView(TwitterUrls.LOGIN.rawValue)
+//        self.view.addSubview(twitterWebView)
+        var web = TwitterWebView(frame:self.view.bounds)
+        web.createWebView()
+        self.view.addSubview(web)
+//        println(loadTwitterWebView)
     }
 
     override func didReceiveMemoryWarning() {
@@ -45,9 +50,10 @@ class FirstViewController: UIViewController,UIWebViewDelegate {
     // webview load
     func loadTwitterWebView(loadUrl: String){
 //        twitterWebView.delegate = self
-        let url: NSURL = NSURL(string: loadUrl)!
-        let request: NSURLRequest = NSURLRequest(URL: url)
-        twitterWebView.loadRequest(request)
+//        twitterWebView.frame = self.view.bounds
+//        let url: NSURL = NSURL(string: loadUrl)!
+//        let request: NSURLRequest = NSURLRequest(URL: url)
+//        twitterWebView.loadRequest(request)
     }
 
     // Pageがすべて読み込み終わった時呼ばれる
@@ -70,7 +76,7 @@ class FirstViewController: UIViewController,UIWebViewDelegate {
     // ログアウト
     func logoutTwitter(){
         let logoutId = "document.getElementById('signout-button').click();"
-        twitterWebView.stringByEvaluatingJavaScriptFromString(logoutId)
+//        twitterWebView.stringByEvaluatingJavaScriptFromString(logoutId)
         var storage : NSHTTPCookieStorage = NSHTTPCookieStorage.sharedHTTPCookieStorage()
         for cookie in storage.cookies  as [NSHTTPCookie]{
             storage.deleteCookie(cookie)
