@@ -11,8 +11,7 @@ import UIKit
 class TwitterAppTableView: UITableView,UITableViewDelegate,UITableViewDataSource {
 
     override init(frame: CGRect, style: UITableViewStyle) {
-        let barHeight: CGFloat = UIApplication.sharedApplication().statusBarFrame.size.height
-        super.init(frame: frame, style: style)
+        super.init(frame: frame,style:style)
         self.delegate = self
         self.dataSource = self
     }
@@ -28,11 +27,9 @@ class TwitterAppTableView: UITableView,UITableViewDelegate,UITableViewDataSource
         // Cell名の登録をおこなう.
         self.registerClass(UITableViewCell.self, forCellReuseIdentifier: "MyCell")
 
-        // DataSourceの設定をする.
         return self
 
     }
-
 
     /*
     Cellが選択された際に呼び出される.

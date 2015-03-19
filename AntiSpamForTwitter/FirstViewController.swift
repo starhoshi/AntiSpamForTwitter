@@ -8,16 +8,22 @@
 
 import UIKit
 
-class FirstViewController: UIViewController,UIWebViewDelegate {
+class FirstViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         var web = TwitterWebView(frame:self.view.bounds)
-        var table = TwitterAppTableView(frame:self.view.bounds,style:UITableViewStyle.Plain)
         web.createWebView()
         self.view.addSubview(web)
 
+        let barHeight: CGFloat = UIApplication.sharedApplication().statusBarFrame.size.height
+        let navBarHeight: CGFloat? = self.navigationController?.navigationBar.frame.size.height
+        let displayWidth: CGFloat = self.view.frame.width
+        let displayHeight: CGFloat = self.view.frame.height
+        let frame = CGRect(x: 0, y: barHeight + navBarHeight!, width: displayWidth, height: displayHeight - barHeight - navBarHeight!)
+
+        var table = TwitterAppTableView(frame:frame,style:UITableViewStyle.Plain)
         table.createTableView()
         self.view.addSubview(table)
     }
