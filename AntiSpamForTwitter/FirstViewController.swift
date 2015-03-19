@@ -14,8 +14,12 @@ class FirstViewController: UIViewController,UIWebViewDelegate {
         super.viewDidLoad()
 
         var web = TwitterWebView(frame:self.view.bounds)
+        var table = TwitterAppTableView(frame:self.view.bounds,style:UITableViewStyle.Plain)
         web.createWebView()
         self.view.addSubview(web)
+
+        table.createTableView()
+        self.view.addSubview(table)
     }
 
     override func didReceiveMemoryWarning() {

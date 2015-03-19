@@ -18,6 +18,7 @@
 		E33D6C961AB0960800D7A366 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = E33D6C941AB0960800D7A366 /* LaunchScreen.xib */; };
 		E33D6CA21AB0960800D7A366 /* AntiSpamForTwitterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E33D6CA11AB0960800D7A366 /* AntiSpamForTwitterTests.swift */; };
 		E3EC88841AB9AB9200308C8D /* TwitterWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3EC88831AB9AB9200308C8D /* TwitterWebView.swift */; };
+		E3EC88881ABB1D6600308C8D /* TwitterAppTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3EC88871ABB1D6600308C8D /* TwitterAppTableView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		E33D6CA01AB0960800D7A366 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E33D6CA11AB0960800D7A366 /* AntiSpamForTwitterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AntiSpamForTwitterTests.swift; sourceTree = "<group>"; };
 		E3EC88831AB9AB9200308C8D /* TwitterWebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterWebView.swift; sourceTree = "<group>"; };
+		E3EC88871ABB1D6600308C8D /* TwitterAppTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterAppTableView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +84,7 @@
 			isa = PBXGroup;
 			children = (
 				E3EC88831AB9AB9200308C8D /* TwitterWebView.swift */,
+				E3EC88871ABB1D6600308C8D /* TwitterAppTableView.swift */,
 				E310DA521AB48E5400F7034A /* libxml2.dylib */,
 				E310DA4A1AB47A8B00F7034A /* Swift-HTML-Parser */,
 				E33D6C861AB0960800D7A366 /* AntiSpamForTwitter */,
@@ -242,6 +245,7 @@
 				E33D6C8E1AB0960800D7A366 /* SecondViewController.swift in Sources */,
 				E33D6C8A1AB0960800D7A366 /* AppDelegate.swift in Sources */,
 				E33D6C8C1AB0960800D7A366 /* FirstViewController.swift in Sources */,
+				E3EC88881ABB1D6600308C8D /* TwitterAppTableView.swift in Sources */,
 				E310DA501AB47A8B00F7034A /* HTMLParser.swift in Sources */,
 				E3EC88841AB9AB9200308C8D /* TwitterWebView.swift in Sources */,
 			);
