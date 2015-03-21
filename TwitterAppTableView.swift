@@ -28,7 +28,6 @@ class TwitterAppTableView: UITableView,UITableViewDelegate,UITableViewDataSource
         self.registerClass(UITableViewCell.self, forCellReuseIdentifier: "MyCell")
 
         return self
-
     }
 
     /*
@@ -59,6 +58,17 @@ class TwitterAppTableView: UITableView,UITableViewDelegate,UITableViewDataSource
 
         return cell
     }
+
+    func change(){
+        self.frame = CGRectZero
+
+    }
+
+    class func showTwitterAppTableView(showFlag: Bool){
+        println(showFlag)
+
+    }
+
     
 
 }

@@ -20,7 +20,7 @@ class FirstViewController: UIViewController {
         let barHeight: CGFloat = UIApplication.sharedApplication().statusBarFrame.size.height
         let navBarHeight: CGFloat? = self.navigationController?.navigationBar.frame.size.height
         let displayWidth: CGFloat = self.view.frame.width
-        let displayHeight: CGFloat = self.view.frame.height
+        let displayHeight: CGFloat = self.view.frame.height / 2
         let frame = CGRect(x: 0, y: barHeight + navBarHeight!, width: displayWidth, height: displayHeight - barHeight - navBarHeight!)
 
         var table = TwitterAppTableView(frame:frame,style:UITableViewStyle.Plain)
