@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ParsedTwitterAppHTML{
+class Twitter{
     
     let html:String!
     
@@ -34,14 +34,13 @@ class ParsedTwitterAppHTML{
         let bodyNode   = parser.body
         var applicationDetail = [String:Any]()
         var application:[[String:Any]] = [[:]]
-        
+
         if let path = bodyNode?.xpath("//div[@class='stream-item oauth-application ']") {
             for node in path {
                 applicationDetail = getApplicationData(node)
                 application.append(applicationDetail)
             }
         }
-        println(application)
         return application
     }
 
@@ -71,6 +70,23 @@ class ParsedTwitterAppHTML{
         applicationDetail["dm"] = metadata.rangeOfString("ダイレクトメッセージ")?.startIndex
         
         return applicationDetail
+    }
+
+    // ログアウト
+    func logoutTwitter(){
+        let logoutId = "document.getElementById('signout-button').click();"
+        //        twitterWebView.stringByEvaluatingJavaScriptFromString(logoutId)
+        var storage : NSHTTPCookieStorage = NSHTTPCookieStorage.sharedHTTPCookieStorage()
+        for cookie in storage.cookies  as [NSHTTPCookie]{
+            storage.deleteCookie(cookie)
+        }
+        
+        NSUserDefaults.standardUserDefaults()
+        //        var cookie: NSHTTPCookie = NSHTTPCookie()
+        var cookieJar: NSHTTPCookieStorage = NSHTTPCookieStorage.sharedHTTPCookieStorage()
+        for cookie in cookieJar.cookies as [NSHTTPCookie]{
+            NSLog("%@", cookie)
+        }
     }
     
 }

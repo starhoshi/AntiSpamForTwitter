@@ -13,9 +13,11 @@ class FirstViewController: UIViewController,UITableViewDelegate,UITableViewDataS
     let myItems: NSArray = ["TEST1", "TEST2", "TEST3"]
     let PC_CHROME_UA = "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/28.0.1500.63 Safari/537.36"
     var defalutUA:String!
-    var application:[[String:Any]] = [[:]]
+    var bouncingBalls : PQFBouncingBalls!
+    var myActivityIndicator: UIActivityIndicatorView!
     let myWebView : UIWebView = UIWebView()
     var myTable : UITableView!
+    var application:[[String:Any]] = [[:]]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,16 +25,26 @@ class FirstViewController: UIViewController,UITableViewDelegate,UITableViewDataS
         defalutUA = getDefaultUA()
         setWebViewParams()
         self.view.addSubview(myWebView)
-        
-        setTableViewParams()
-        self.view.addSubview(myTable)
+//        createLoadingView()
+
+        // インジケータを作成する.
+        myActivityIndicator = UIActivityIndicatorView()
+        myActivityIndicator.frame = CGRectMake(0, 0, 50, 50)
+        myActivityIndicator.center = self.view.center
+
+        // アニメーションが停止している時もインジケータを表示させる.
+        myActivityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
+        // アニメーションを開始する.
+        self.view.addSubview(myActivityIndicator)
+
+        // インジケータをViewに追加する.
     }
-    
+
     func setTableViewParams(){
-        myTable.dataSource = self
-        myTable.delegate = self
         let frame = getWindowSize()
         myTable = UITableView(frame: frame)
+        myTable.dataSource = self
+        myTable.delegate = self
         
         // Cell名の登録をおこなう.
         myTable.registerClass(UITableViewCell.self, forCellReuseIdentifier: "MyCell")
@@ -46,10 +58,6 @@ class FirstViewController: UIViewController,UITableViewDelegate,UITableViewDataS
         myWebView.loadRequest(request)
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
-    
     // 初期状態のUAを保存しておく
     func getDefaultUA() -> String{
         let webView:UIWebView = UIWebView()
@@ -61,75 +69,93 @@ class FirstViewController: UIViewController,UITableViewDelegate,UITableViewDataS
     func getWindowSize() -> CGRect{
         let barHeight: CGFloat = UIApplication.sharedApplication().statusBarFrame.size.height
         let navBarHeight: CGFloat? = self.navigationController?.navigationBar.frame.size.height
+        let tabBarHeight: CGFloat = self.tabBarController!.tabBar.frame.size.height
         let displayWidth: CGFloat = self.view.frame.width
         let displayHeight: CGFloat = self.view.frame.height
-        let frame = CGRect(x: 0, y: barHeight + navBarHeight! + 300, width: displayWidth, height: displayHeight - barHeight - navBarHeight!)
+        let frame = CGRect(x: 0, y: barHeight + navBarHeight! , width: displayWidth, height: displayHeight - barHeight - navBarHeight! - tabBarHeight)
         
         return frame
     }
     
     // UA書き換え
-    func changeUserAgent(){
+    func changeUserAgentToPC(){
         let userAgentStr = PC_CHROME_UA
         let dic:NSDictionary = ["UserAgent":userAgentStr]
         NSUserDefaults.standardUserDefaults().registerDefaults(dic)
     }
     
+    func webViewDidStartLoad(webView: UIWebView) {
+//        bouncingBalls.show()
+        myActivityIndicator.startAnimating()
+    }
+    
     // Pageがすべて読み込み終わった時呼ばれる
     func webViewDidFinishLoad(webView: UIWebView!) {
+        // 読み込み中の場合は処理を行わない
+        if(webView.loading){
+            return
+        }
         println("webViewDidFinishLoad")
         let js = "document.body.innerHTML"
         let body = webView.stringByEvaluatingJavaScriptFromString(js)
-        let parsedTwitterAppHTML = ParsedTwitterAppHTML(twitterAppHtml: body!)
-        parsedTwitterAppHTML.parseHtml()
         if let currentUrl = webView.request?.URL.absoluteString {
             println(currentUrl)
-            if currentUrl == TwitterUrls.INDEX.rawValue {
-                println("login true")
-            }else{
-                println("login false")
+            switch currentUrl {
+            case TwitterUrls.APPLICATIONS.rawValue :
+                let parsedTwitterAppHTML = Twitter(twitterAppHtml: body!)
+                application = parsedTwitterAppHTML.parseHtml()
+                println(application)
+
+                myActivityIndicator.stopAnimating()
+                setTableViewParams()
+                self.view.addSubview(myTable)
+
+            case TwitterUrls.INDEX.rawValue :
+                accessApplicationURL()
+            default:
+                myActivityIndicator.stopAnimating()
+                println("other")
+                break
             }
         }
-        //                logoutTwitter()
     }
     
-    // ログアウト
-    func logoutTwitter(){
-        let logoutId = "document.getElementById('signout-button').click();"
-        //        twitterWebView.stringByEvaluatingJavaScriptFromString(logoutId)
-        var storage : NSHTTPCookieStorage = NSHTTPCookieStorage.sharedHTTPCookieStorage()
-        for cookie in storage.cookies  as [NSHTTPCookie]{
-            storage.deleteCookie(cookie)
-        }
+    func createLoadingView(){
+        bouncingBalls = PQFBouncingBalls(loaderOnView: self.view)
+        bouncingBalls.jumpAmount = 50
+        bouncingBalls.loaderColor = UIColor.flatOrangeColor()
+        let loadingLabel: UILabel = UILabel(frame: CGRectMake(0,0,200,50))
+        loadingLabel.text = "Data Loading..."
+        bouncingBalls.label = loadingLabel
+        bouncingBalls.backgroundColor = UIColor.flatBelizeHoleColor()
         
-        NSUserDefaults.standardUserDefaults()
-        //        var cookie: NSHTTPCookie = NSHTTPCookie()
-        var cookieJar: NSHTTPCookieStorage = NSHTTPCookieStorage.sharedHTTPCookieStorage()
-        for cookie in cookieJar.cookies as [NSHTTPCookie]{
-            NSLog("%@", cookie)
-        }
     }
     
-    
-    // Pageがloadされ始めた時、呼ばれる
-    func webViewDidStartLoad(webView: UIWebView!) {
-        println("webViewDidStartLoad")
-        println(webView.request?.URL)
+    func accessApplicationURL(){
+        changeUserAgentToPC()
+        let myWeb: UIWebView = UIWebView()
+        let url: NSURL = NSURL(string: TwitterUrls.APPLICATIONS.rawValue)!
+        let request: NSURLRequest = NSURLRequest(URL: url)
+        myWeb.delegate = self
+        myWeb.frame = CGRectZero
+        myWeb.loadRequest(request)
+        self.view.addSubview(myWeb)
     }
+    
     
     /*
     Cellが選択された際に呼び出される.
     */
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         println("Num: \(indexPath.row)")
-        println("Value: \(myItems[indexPath.row])")
+        println("Value: \(application[indexPath.row])")
     }
     
     /*
     Cellの総数を返す.
     */
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return myItems.count
+        return application.count
     }
     
     /*
@@ -141,11 +167,14 @@ class FirstViewController: UIViewController,UITableViewDelegate,UITableViewDataS
         let cell = tableView.dequeueReusableCellWithIdentifier("MyCell", forIndexPath: indexPath) as UITableViewCell
         
         // Cellに値を設定する.
-        cell.textLabel!.text = "\(myItems[indexPath.row])"
+        cell.textLabel!.text = application[indexPath.row]["name"] as String!
         
         return cell
     }
     
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
 }
 
 private enum TwitterUrls: String {
@@ -153,6 +182,6 @@ private enum TwitterUrls: String {
     case INDEX = "https://mobile.twitter.com/"
     case LOGIN_PC = "https://twitter.com/login/"
     case INDEX_PC = "https://twitter.com/"
-    case APPLICATIONS = "https://twitter.com/settings/applications/"
+    case APPLICATIONS = "https://twitter.com/settings/applications"
 }
 

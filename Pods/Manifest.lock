@@ -1,0 +1,13 @@
+PODS:
+  - PQFCustomLoaders (0.0.1):
+    - UIColor+FlatColors
+  - UIColor+FlatColors (0.0.2)
+
+DEPENDENCIES:
+  - PQFCustomLoaders (~> 0.0.1)
+
+SPEC CHECKSUMS:
+  PQFCustomLoaders: 3f59916dce73c721a823a5bb21be28305329e775
+  UIColor+FlatColors: 15506ef6472e26a751033f2f2469283800bcb906
+
+COCOAPODS: 0.35.0
