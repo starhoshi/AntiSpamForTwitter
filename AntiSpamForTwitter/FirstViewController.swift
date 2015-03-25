@@ -110,6 +110,8 @@ class FirstViewController: UIViewController,UITableViewDelegate,UITableViewDataS
                 setTableViewParams()
                 self.view.addSubview(myTable)
 
+
+
             case TwitterUrls.INDEX.rawValue :
                 accessApplicationURL()
             default:
@@ -168,7 +170,7 @@ class FirstViewController: UIViewController,UITableViewDelegate,UITableViewDataS
         
         // Cellに値を設定する.
         cell.textLabel!.text = application[indexPath.row]["name"] as String!
-        
+
         return cell
     }
     

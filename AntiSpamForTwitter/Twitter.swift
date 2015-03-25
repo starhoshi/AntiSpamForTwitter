@@ -33,28 +33,35 @@ class Twitter{
         
         let bodyNode   = parser.body
         var applicationDetail = [String:Any]()
-        var application:[[String:Any]] = [[:]]
-
+        var application:[[String:Any]] = []
+        
         if let path = bodyNode?.xpath("//div[@class='stream-item oauth-application ']") {
             for node in path {
+                // iOSアプリの許可を取り消す方法はこちら
+                if (node.findChildTagAttr("a", attrName: "class", attrValue: "revoke ios-revoke-access") != nil){
+                    continue
+                }
                 applicationDetail = getApplicationData(node)
                 application.append(applicationDetail)
             }
         }
         return application
     }
-
-
+    
+    
     /**
     Twitter の Applicationデータ を取得する
-
+    
     :param: node <#node description#>
-
+    
     :returns: <#return value description#>
     */
     private func getApplicationData(node: HTMLNode) -> [String:Any]{
         var applicationDetail = [String:Any]()
         var metadata: String
+        
+        // TODO Facebook
+        println(node.findChildTagAttr("div", attrName: "class", attrValue: "FacebookConnect-title"))
         
         applicationDetail["name"] = node.findChildTag("strong")?.contents as String!
         applicationDetail["button_id"] = node.findChildTag("button")?.getAttributeNamed("id")
@@ -71,7 +78,7 @@ class Twitter{
         
         return applicationDetail
     }
-
+    
     // ログアウト
     func logoutTwitter(){
         let logoutId = "document.getElementById('signout-button').click();"
