@@ -15,16 +15,19 @@ class FirstViewController: UIViewController,UITableViewDelegate,UITableViewDataS
     var defalutUA:String!
     var bouncingBalls : PQFBouncingBalls!
     var myActivityIndicator: UIActivityIndicatorView!
-    let myWebView : UIWebView = UIWebView()
-    var myTable : UITableView!
+//    let myWebView : UIWebView = UIWebView()
+//    var myTable : UITableView!
     var application:[[String:Any]] = [[:]]
     
+    @IBOutlet weak var TwitterWebView: UIWebView!
+    @IBOutlet weak var TwitterTableView: UITableView!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
         defalutUA = getDefaultUA()
         setWebViewParams()
-        self.view.addSubview(myWebView)
+        self.view.addSubview(TwitterWebView)
 //        createLoadingView()
 
         // インジケータを作成する.
@@ -41,21 +44,21 @@ class FirstViewController: UIViewController,UITableViewDelegate,UITableViewDataS
     }
 
     func setTableViewParams(){
+        TwitterTableView.delegate = self
+        TwitterTableView.dataSource = self
         let frame = getWindowSize()
-        myTable = UITableView(frame: frame)
-        myTable.dataSource = self
-        myTable.delegate = self
-        
+//        TwitterTableView = UITableView(frame: frame)
+
         // Cell名の登録をおこなう.
-        myTable.registerClass(UITableViewCell.self, forCellReuseIdentifier: "MyCell")
+        TwitterTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "MyCell")
+        TwitterTableView.reloadData()
     }
     
     func setWebViewParams(){
-        myWebView.delegate = self
-        myWebView.frame = self.view.bounds
+        TwitterWebView.frame = self.view.bounds
         let url: NSURL = NSURL(string: TwitterUrls.LOGIN.rawValue)!
         let request: NSURLRequest = NSURLRequest(URL: url)
-        myWebView.loadRequest(request)
+        TwitterWebView.loadRequest(request)
     }
     
     // 初期状態のUAを保存しておく
@@ -108,7 +111,7 @@ class FirstViewController: UIViewController,UITableViewDelegate,UITableViewDataS
 
                 myActivityIndicator.stopAnimating()
                 setTableViewParams()
-                self.view.addSubview(myTable)
+                self.view.addSubview(TwitterTableView)
 
 
 
@@ -130,7 +133,6 @@ class FirstViewController: UIViewController,UITableViewDelegate,UITableViewDataS
         loadingLabel.text = "Data Loading..."
         bouncingBalls.label = loadingLabel
         bouncingBalls.backgroundColor = UIColor.flatBelizeHoleColor()
-        
     }
     
     func accessApplicationURL(){
