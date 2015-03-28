@@ -49,8 +49,13 @@ class FirstViewController: UIViewController,UITableViewDelegate,UITableViewDataS
         let frame = getWindowSize()
 //        TwitterTableView = UITableView(frame: frame)
 
+        var nib  = UINib(nibName: "TwitterAppTableViewCell", bundle:nil)
+        TwitterTableView.registerNib(nib, forCellReuseIdentifier:"TwitterAppCell")
+        TwitterTableView.estimatedRowHeight = 100.0
+        TwitterTableView.rowHeight = UITableViewAutomaticDimension
+
         // Cell名の登録をおこなう.
-        TwitterTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "MyCell")
+//        TwitterTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "MyCell")
         TwitterTableView.reloadData()
     }
     
@@ -168,7 +173,7 @@ class FirstViewController: UIViewController,UITableViewDelegate,UITableViewDataS
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         // Cellの.を取得する.
-        let cell = tableView.dequeueReusableCellWithIdentifier("MyCell", forIndexPath: indexPath) as UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("TwitterAppCell", forIndexPath: indexPath) as UITableViewCell
         
         // Cellに値を設定する.
         cell.textLabel!.text = application[indexPath.row]["name"] as String!
