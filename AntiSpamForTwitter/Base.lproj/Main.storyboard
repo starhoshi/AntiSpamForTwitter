@@ -55,7 +55,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
-                            <webView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JZB-0Y-ID7">
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JZB-0Y-ID7">
                                 <rect key="frame" x="0.0" y="57" width="600" height="487"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
@@ -65,6 +65,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="JZB-0Y-ID7" firstAttribute="top" secondItem="4EQ-wa-l7P" secondAttribute="bottom" id="HOF-Ec-L1c"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="JZB-0Y-ID7" secondAttribute="trailing" constant="-16" id="JtM-Hx-zyP"/>
+                            <constraint firstItem="JZB-0Y-ID7" firstAttribute="leading" secondItem="Djt-YB-MTM" secondAttribute="leadingMargin" constant="-16" id="Lfu-Ro-WrF"/>
+                            <constraint firstItem="DAV-Dv-8kp" firstAttribute="top" secondItem="JZB-0Y-ID7" secondAttribute="bottom" id="dai-y0-rIs"/>
                             <constraint firstItem="Sqq-cc-95e" firstAttribute="bottom" secondItem="Djt-YB-MTM" secondAttribute="bottomMargin" id="suu-84-ONW"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Sqq-cc-95e" secondAttribute="trailing" constant="-16" id="t6n-8x-xyk"/>
                             <constraint firstItem="Sqq-cc-95e" firstAttribute="top" secondItem="Djt-YB-MTM" secondAttribute="topMargin" id="xdE-sd-jdd"/>

@@ -30,6 +30,7 @@ class FirstViewController: UIViewController,UITableViewDelegate,UITableViewDataS
         self.view.addSubview(TwitterWebView)
 //        createLoadingView()
 
+        setIndicatorParams()
         self.view.addSubview(myActivityIndicator)
     }
 
@@ -46,16 +47,12 @@ class FirstViewController: UIViewController,UITableViewDelegate,UITableViewDataS
     func setTableViewParams(){
         TwitterTableView.delegate = self
         TwitterTableView.dataSource = self
-//        let frame = getWindowSize()
-//        TwitterTableView = UITableView(frame: frame)
 
         var nib  = UINib(nibName: "TwitterAppTableViewCell", bundle:nil)
         TwitterTableView.registerNib(nib, forCellReuseIdentifier:"TwitterAppCell")
-        TwitterTableView.estimatedRowHeight = 100.0
+        TwitterTableView.estimatedRowHeight = 200.0
         TwitterTableView.rowHeight = UITableViewAutomaticDimension
 
-        // Cell名の登録をおこなう.
-//        TwitterTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "MyCell")
         TwitterTableView.reloadData()
     }
     
@@ -173,10 +170,17 @@ class FirstViewController: UIViewController,UITableViewDelegate,UITableViewDataS
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         // Cellの.を取得する.
-        let cell = tableView.dequeueReusableCellWithIdentifier("TwitterAppCell", forIndexPath: indexPath) as UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("TwitterAppCell", forIndexPath: indexPath) as TwitterAppTableViewCell
         
         // Cellに値を設定する.
-        cell.textLabel!.text = application[indexPath.row]["name"] as String!
+        cell.titleLabel.text = application[indexPath.row]["name"] as String!
+        cell.descriptionLabel.text = application[indexPath.row]["description"] as String!
+        cell.dateLabel.text = application[indexPath.row]["allow_date"] as String!
+
+
+        let url = NSURL(string: application[indexPath.row]["image"] as String!)
+        let data = NSData(contentsOfURL: url!) //make sure your image in this url does exist, otherwise unwrap in a if let check
+        cell.appImage.image = UIImage(data: data!)
 
         return cell
     }
