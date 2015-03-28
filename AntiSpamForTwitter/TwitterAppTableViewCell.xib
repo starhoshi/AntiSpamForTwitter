@@ -2,25 +2,30 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" restorationIdentifier="TwitterAppCell" selectionStyle="default" indentationWidth="10" rowHeight="166" id="KGk-i7-Jjw" customClass="TwitterAppTableViewCell" customModule="AntiSpamForTwitter" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="473" height="166"/>
+        <tableViewCell contentMode="scaleToFill" restorationIdentifier="TwitterAppCell" selectionStyle="default" indentationWidth="10" rowHeight="106" id="KGk-i7-Jjw" customClass="TwitterAppTableViewCell" customModule="AntiSpamForTwitter" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="473" height="106"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="AppName" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rrK-vb-7db">
-                        <rect key="frame" x="92" y="12" width="373" height="26"/>
+                        <rect key="frame" x="92" y="12" width="373" height="22"/>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pfh-pl-4O9">
-                        <rect key="frame" x="8" y="11" width="76" height="76"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pfh-pl-4O9">
+                        <rect key="frame" x="8" y="8" width="50" height="50"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="50" id="FW7-cx-NLo"/>
+                            <constraint firstAttribute="height" constant="50" id="GHp-hS-HIU"/>
+                        </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="description" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b7a-2D-0ma">
                         <rect key="frame" x="92" y="35" width="373" height="25"/>
@@ -28,18 +33,6 @@
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lK8-RW-4nX">
-                        <rect key="frame" x="8" y="138" width="31" height="21"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Isc-NY-ZTY">
-                        <rect key="frame" x="592" y="0.0" width="46" height="30"/>
-                        <state key="normal" title="Button">
-                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                        </state>
-                    </button>
                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R8Y-Yn-Mlg">
                         <rect key="frame" x="409" y="65" width="56" height="34"/>
                         <color key="backgroundColor" red="0.28886294680000002" green="0.78987136989999995" blue="0.42150593619999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -49,7 +42,17 @@
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                     </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lK8-RW-4nX">
+                        <rect key="frame" x="8" y="68" width="31" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
+                <constraints>
+                    <constraint firstItem="pfh-pl-4O9" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="2cG-Q8-yCq"/>
+                    <constraint firstItem="pfh-pl-4O9" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="5aE-vQ-7n2"/>
+                </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="appImage" destination="pfh-pl-4O9" id="RiY-pU-mwh"/>
@@ -57,7 +60,7 @@
                 <outlet property="descriptionLabel" destination="b7a-2D-0ma" id="z3C-Zd-sdw"/>
                 <outlet property="titleLabel" destination="rrK-vb-7db" id="jM8-Ef-w0p"/>
             </connections>
-            <point key="canvasLocation" x="365.5" y="518"/>
+            <point key="canvasLocation" x="430.5" y="675"/>
         </tableViewCell>
     </objects>
 </document>
