@@ -30,23 +30,23 @@ class FirstViewController: UIViewController,UITableViewDelegate,UITableViewDataS
         self.view.addSubview(TwitterWebView)
 //        createLoadingView()
 
-        // インジケータを作成する.
+        self.view.addSubview(myActivityIndicator)
+    }
+
+    func setIndicatorParams(){
         myActivityIndicator = UIActivityIndicatorView()
         myActivityIndicator.frame = CGRectMake(0, 0, 50, 50)
         myActivityIndicator.center = self.view.center
 
         // アニメーションが停止している時もインジケータを表示させる.
         myActivityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
-        // アニメーションを開始する.
-        self.view.addSubview(myActivityIndicator)
 
-        // インジケータをViewに追加する.
     }
 
     func setTableViewParams(){
         TwitterTableView.delegate = self
         TwitterTableView.dataSource = self
-        let frame = getWindowSize()
+//        let frame = getWindowSize()
 //        TwitterTableView = UITableView(frame: frame)
 
         var nib  = UINib(nibName: "TwitterAppTableViewCell", bundle:nil)
