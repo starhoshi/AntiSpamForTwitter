@@ -1,6 +1,6 @@
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
-HEADER_SEARCH_PATHS = "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/PQFCustomLoaders" "${PODS_ROOT}/Headers/Public/UIColor+FlatColors"
-OTHER_CFLAGS = $(inherited) -isystem "${PODS_ROOT}/Headers/Public" -isystem "${PODS_ROOT}/Headers/Public/PQFCustomLoaders" -isystem "${PODS_ROOT}/Headers/Public/UIColor+FlatColors"
-OTHER_LDFLAGS = -ObjC -l"Pods-PQFCustomLoaders" -l"Pods-UIColor+FlatColors" -framework "UIKit"
+HEADER_SEARCH_PATHS = "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/PQFCustomLoaders" "${PODS_ROOT}/Headers/Public/RJImageLoader" "${PODS_ROOT}/Headers/Public/SDWebImage" "${PODS_ROOT}/Headers/Public/UIColor+FlatColors"
+OTHER_CFLAGS = $(inherited) -isystem "${PODS_ROOT}/Headers/Public" -isystem "${PODS_ROOT}/Headers/Public/PQFCustomLoaders" -isystem "${PODS_ROOT}/Headers/Public/RJImageLoader" -isystem "${PODS_ROOT}/Headers/Public/SDWebImage" -isystem "${PODS_ROOT}/Headers/Public/UIColor+FlatColors"
+OTHER_LDFLAGS = -ObjC -l"Pods-PQFCustomLoaders" -l"Pods-RJImageLoader" -l"Pods-SDWebImage" -l"Pods-UIColor+FlatColors" -framework "ImageIO" -framework "UIKit"
 OTHER_LIBTOOLFLAGS = $(OTHER_LDFLAGS)
 PODS_ROOT = ${SRCROOT}/Pods

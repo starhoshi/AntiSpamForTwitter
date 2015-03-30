@@ -15,7 +15,7 @@ class FirstViewController: UIViewController,UITableViewDelegate,UITableViewDataS
     var defalutUA:String!
     var bouncingBalls : PQFBouncingBalls!
     var myActivityIndicator: UIActivityIndicatorView!
-//    let myWebView : UIWebView = UIWebView()
+    let myWebView : UIWebView = UIWebView()
 //    var myTable : UITableView!
     var application:[[String:Any]] = [[:]]
     
@@ -115,8 +115,6 @@ class FirstViewController: UIViewController,UITableViewDelegate,UITableViewDataS
                 setTableViewParams()
                 self.view.addSubview(TwitterTableView)
 
-
-
             case TwitterUrls.INDEX.rawValue :
                 accessApplicationURL()
             default:
@@ -139,13 +137,13 @@ class FirstViewController: UIViewController,UITableViewDelegate,UITableViewDataS
     
     func accessApplicationURL(){
         changeUserAgentToPC()
-        let myWeb: UIWebView = UIWebView()
+//        let myWeb: UIWebView = UIWebView()
         let url: NSURL = NSURL(string: TwitterUrls.APPLICATIONS.rawValue)!
         let request: NSURLRequest = NSURLRequest(URL: url)
-        myWeb.delegate = self
-        myWeb.frame = CGRectZero
-        myWeb.loadRequest(request)
-        self.view.addSubview(myWeb)
+        myWebView.delegate = self
+        myWebView.frame = CGRectZero
+        myWebView.loadRequest(request)
+        self.view.addSubview(myWebView)
     }
     
     
@@ -176,14 +174,34 @@ class FirstViewController: UIViewController,UITableViewDelegate,UITableViewDataS
         cell.titleLabel.text = application[indexPath.row]["name"] as String!
         cell.descriptionLabel.text = application[indexPath.row]["description"] as String!
         cell.dateLabel.text = application[indexPath.row]["allow_date"] as String!
+        cell.revokeButton.addTarget(self, action: "buttonPressed:", forControlEvents: .TouchUpInside)
+        cell.revokeButton.tag = indexPath.row;
 
 
         let url = NSURL(string: application[indexPath.row]["image"] as String!)
-        let data = NSData(contentsOfURL: url!) //make sure your image in this url does exist, otherwise unwrap in a if let check
-        cell.appImage.image = UIImage(data: data!)
+        cell.appImage.startLoaderWithTintColor(UIColor.flatNephritisColor())
+        cell.appImage.sd_setImageWithURL(url, placeholderImage: nil, options: SDWebImageOptions.RefreshCached,
+            progress: { (receivedSize: Int, expectedSize: Int) -> Void in
+                let progress: CGFloat = CGFloat(receivedSize / expectedSize)
+                cell.appImage.updateImageDownloadProgress(progress)
+            },
+            completed: {[weak self] (image, data, error, finished) in
+                cell.appImage.reveal()
+            }
+        )
 
         return cell
     }
+
+    func buttonPressed(sender: UIButton!){
+        println(application[sender.tag])
+        let buttonId = application[sender.tag]["button_id"] as String!
+        let js = "document.getElementById('\(buttonId)').click();"
+        let click = myWebView.stringByEvaluatingJavaScriptFromString(js)
+        println(click)
+    }
+
+
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

@@ -7,6 +7,8 @@
 //
 
 #import <PQFCustomLoaders/PQFCustomLoaders.h>
+#import <UIImageView+RJLoader.h>
+#import <SDWebImage/UIImageView+WebCache.h>
 #import <libxml/HTMLtree.h>
 #import <libxml/xpath.h>
 
