@@ -124,7 +124,7 @@ class FirstViewController: UIViewController,UITableViewDelegate,UITableViewDataS
             }
         }
     }
-    
+
     func createLoadingView(){
         bouncingBalls = PQFBouncingBalls(loaderOnView: self.view)
         bouncingBalls.jumpAmount = 50
@@ -145,14 +145,13 @@ class FirstViewController: UIViewController,UITableViewDelegate,UITableViewDataS
         myWebView.loadRequest(request)
         self.view.addSubview(myWebView)
     }
-    
-    
+
     /*
     Cellが選択された際に呼び出される.
     */
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        println("Num: \(indexPath.row)")
-        println("Value: \(application[indexPath.row])")
+//        println("Num: \(indexPath.row)")
+//        println("Value: \(application[indexPath.row])")
     }
     
     /*
@@ -201,6 +200,15 @@ class FirstViewController: UIViewController,UITableViewDelegate,UITableViewDataS
         println(click)
     }
 
+
+    func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool {
+        println(request.description)
+        return true
+    }
+
+    func webView(webView: UIWebView, didFailLoadWithError error: NSError) {
+        println(error)
+    }
 
 
     override func didReceiveMemoryWarning() {
