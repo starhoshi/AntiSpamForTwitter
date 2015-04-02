@@ -1,4 +1,5 @@
 PODS:
+  - Alamofire (1.1.4)
   - PQFCustomLoaders (0.0.1):
     - UIColor+FlatColors
   - RJImageLoader (0.3.0)
@@ -8,14 +9,17 @@ PODS:
   - UIColor+FlatColors (0.0.2)
 
 DEPENDENCIES:
+  - Alamofire (~> 1.1)
   - PQFCustomLoaders (~> 0.0.1)
   - RJImageLoader
   - SDWebImage (~> 3.7)
+  - UIColor+FlatColors
 
 SPEC CHECKSUMS:
-  PQFCustomLoaders: 3f59916dce73c721a823a5bb21be28305329e775
-  RJImageLoader: 47ae0451e21aded385e240e850c652596039367f
+  Alamofire: 6a2cbaebe78a6d469bc55ee37f0a24ba22af76ac
+  PQFCustomLoaders: 6e630d3ab3987e035598050f56a4f5a6a7766d92
+  RJImageLoader: f0d9edebeb7837feb0ce51759826900645770db7
   SDWebImage: 71b7cdc1d1721d6a82ed62889030225f2c249e29
-  UIColor+FlatColors: 15506ef6472e26a751033f2f2469283800bcb906
+  UIColor+FlatColors: 6c699df7a575281794c688c64cee6c44fd1f93b4
 
-COCOAPODS: 0.35.0
+COCOAPODS: 0.36.3

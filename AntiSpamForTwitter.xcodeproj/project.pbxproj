@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		793EF09A06F5825053B4EBA5 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3928D1A35D2663947EA3714C /* libPods.a */; };
 		E310DA4F1AB47A8B00F7034A /* HTMLNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = E310DA4B1AB47A8B00F7034A /* HTMLNode.swift */; };
 		E310DA501AB47A8B00F7034A /* HTMLParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = E310DA4C1AB47A8B00F7034A /* HTMLParser.swift */; };
 		E310DA531AB48E5400F7034A /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E310DA521AB48E5400F7034A /* libxml2.dylib */; };
@@ -21,6 +20,7 @@
 		E37855881ABDBAF3003AF77E /* Twitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E37855871ABDBAF3003AF77E /* Twitter.swift */; };
 		E3A367481AC6943000F46354 /* TwitterAppTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A367461AC6943000F46354 /* TwitterAppTableViewCell.swift */; };
 		E3A367491AC6943000F46354 /* TwitterAppTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3A367471AC6943000F46354 /* TwitterAppTableViewCell.xib */; };
+		ECFA35956BD7B28A8FECD40B /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A62839BED679F49CFCA0006A /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,7 +36,7 @@
 /* Begin PBXFileReference section */
 		1CA7A8A94EE71C1FA185338D /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		303FB9122220E7D1A9D5A1C2 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
-		3928D1A35D2663947EA3714C /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		A62839BED679F49CFCA0006A /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E310DA4B1AB47A8B00F7034A /* HTMLNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTMLNode.swift; sourceTree = "<group>"; };
 		E310DA4C1AB47A8B00F7034A /* HTMLParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTMLParser.swift; sourceTree = "<group>"; };
 		E310DA521AB48E5400F7034A /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
@@ -63,7 +63,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E310DA531AB48E5400F7034A /* libxml2.dylib in Frameworks */,
-				793EF09A06F5825053B4EBA5 /* libPods.a in Frameworks */,
+				ECFA35956BD7B28A8FECD40B /* Pods.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -80,7 +80,7 @@
 		C692FBB642370323156C7F1C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				3928D1A35D2663947EA3714C /* libPods.a */,
+				A62839BED679F49CFCA0006A /* Pods.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -180,6 +180,7 @@
 				E33D6C811AB0960800D7A366 /* Frameworks */,
 				E33D6C821AB0960800D7A366 /* Resources */,
 				F50526B72822401308C5C854 /* Copy Pods Resources */,
+				AD31672BA8BEF2787F122D88 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -280,6 +281,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		AD31672BA8BEF2787F122D88 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		F50526B72822401308C5C854 /* Copy Pods Resources */ = {

@@ -7,13 +7,17 @@
 //
 
 import UIKit
+import SDWebImage
+import UIColor_FlatColors
+import Alamofire
+import RJImageLoader
 
-class FirstViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,UIWebViewDelegate {
+class FirstViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,UIWebViewDelegate{
     
     let myItems: NSArray = ["TEST1", "TEST2", "TEST3"]
     let PC_CHROME_UA = "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/28.0.1500.63 Safari/537.36"
     var defalutUA:String!
-    var bouncingBalls : PQFBouncingBalls!
+//    var bouncingBalls : PQFBouncingBalls!
     var myActivityIndicator: UIActivityIndicatorView!
     let myWebView : UIWebView = UIWebView()
 //    var myTable : UITableView!
@@ -58,6 +62,7 @@ class FirstViewController: UIViewController,UITableViewDelegate,UITableViewDataS
     
     func setWebViewParams(){
         TwitterWebView.frame = self.view.bounds
+        TwitterWebView.scrollView.scrollsToTop = false
         let url: NSURL = NSURL(string: TwitterUrls.LOGIN.rawValue)!
         let request: NSURLRequest = NSURLRequest(URL: url)
         TwitterWebView.loadRequest(request)
@@ -67,6 +72,7 @@ class FirstViewController: UIViewController,UITableViewDelegate,UITableViewDataS
     func getDefaultUA() -> String{
         let webView:UIWebView = UIWebView()
         webView.frame = CGRectZero
+        webView.scrollView.scrollsToTop = false
         let userAgent:String! = webView.stringByEvaluatingJavaScriptFromString("navigator.userAgent")
         return userAgent
     }
@@ -126,13 +132,13 @@ class FirstViewController: UIViewController,UITableViewDelegate,UITableViewDataS
     }
 
     func createLoadingView(){
-        bouncingBalls = PQFBouncingBalls(loaderOnView: self.view)
-        bouncingBalls.jumpAmount = 50
-        bouncingBalls.loaderColor = UIColor.flatOrangeColor()
-        let loadingLabel: UILabel = UILabel(frame: CGRectMake(0,0,200,50))
-        loadingLabel.text = "Data Loading..."
-        bouncingBalls.label = loadingLabel
-        bouncingBalls.backgroundColor = UIColor.flatBelizeHoleColor()
+//        bouncingBalls = PQFBouncingBalls(loaderOnView: self.view)
+//        bouncingBalls.jumpAmount = 50
+//        bouncingBalls.loaderColor = UIColor.flatOrangeColor()
+//        let loadingLabel: UILabel = UILabel(frame: CGRectMake(0,0,200,50))
+//        loadingLabel.text = "Data Loading..."
+//        bouncingBalls.label = loadingLabel
+//        bouncingBalls.backgroundColor = UIColor.flatBelizeHoleColor()
     }
     
     func accessApplicationURL(){
@@ -142,6 +148,7 @@ class FirstViewController: UIViewController,UITableViewDelegate,UITableViewDataS
         let request: NSURLRequest = NSURLRequest(URL: url)
         myWebView.delegate = self
         myWebView.frame = CGRectZero
+        myWebView.scrollView.scrollsToTop = false
         myWebView.loadRequest(request)
         self.view.addSubview(myWebView)
     }
@@ -188,6 +195,7 @@ class FirstViewController: UIViewController,UITableViewDelegate,UITableViewDataS
                 cell.appImage.reveal()
             }
         )
+        cell.setNeedsLayout()
 
         return cell
     }
@@ -199,17 +207,6 @@ class FirstViewController: UIViewController,UITableViewDelegate,UITableViewDataS
         let click = myWebView.stringByEvaluatingJavaScriptFromString(js)
         println(click)
     }
-
-
-    func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool {
-        println(request.description)
-        return true
-    }
-
-    func webView(webView: UIWebView, didFailLoadWithError error: NSError) {
-        println(error)
-    }
-
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

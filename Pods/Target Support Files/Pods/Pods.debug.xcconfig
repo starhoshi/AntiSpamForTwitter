@@ -1,6 +1,9 @@
+FRAMEWORK_SEARCH_PATHS = "$PODS_FRAMEWORK_BUILD_PATH"
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
-HEADER_SEARCH_PATHS = "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/PQFCustomLoaders" "${PODS_ROOT}/Headers/Public/RJImageLoader" "${PODS_ROOT}/Headers/Public/SDWebImage" "${PODS_ROOT}/Headers/Public/UIColor+FlatColors"
-OTHER_CFLAGS = $(inherited) -isystem "${PODS_ROOT}/Headers/Public" -isystem "${PODS_ROOT}/Headers/Public/PQFCustomLoaders" -isystem "${PODS_ROOT}/Headers/Public/RJImageLoader" -isystem "${PODS_ROOT}/Headers/Public/SDWebImage" -isystem "${PODS_ROOT}/Headers/Public/UIColor+FlatColors"
-OTHER_LDFLAGS = -ObjC -l"Pods-PQFCustomLoaders" -l"Pods-RJImageLoader" -l"Pods-SDWebImage" -l"Pods-UIColor+FlatColors" -framework "ImageIO" -framework "UIKit"
+LD_RUNPATH_SEARCH_PATHS = $(inherited) '@executable_path/Frameworks' '@loader_path/Frameworks'
+OTHER_CFLAGS = $(inherited) -iquote "$PODS_FRAMEWORK_BUILD_PATH/Alamofire.framework/Headers" -iquote "$PODS_FRAMEWORK_BUILD_PATH/PQFCustomLoaders.framework/Headers" -iquote "$PODS_FRAMEWORK_BUILD_PATH/RJImageLoader.framework/Headers" -iquote "$PODS_FRAMEWORK_BUILD_PATH/SDWebImage.framework/Headers" -iquote "$PODS_FRAMEWORK_BUILD_PATH/UIColor_FlatColors.framework/Headers"
+OTHER_LDFLAGS = $(inherited) -ObjC -framework "Alamofire" -framework "PQFCustomLoaders" -framework "RJImageLoader" -framework "SDWebImage" -framework "UIColor_FlatColors"
 OTHER_LIBTOOLFLAGS = $(OTHER_LDFLAGS)
+OTHER_SWIFT_FLAGS = $(inherited) "-D" "COCOAPODS"
+PODS_FRAMEWORK_BUILD_PATH = $(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/Pods
 PODS_ROOT = ${SRCROOT}/Pods

@@ -1,0 +1,6 @@
+framework module PQFCustomLoaders {
+  umbrella header "Pods-PQFCustomLoaders-umbrella.h"
+
+  export *
+  module * { export * }
+}
