@@ -11,7 +11,7 @@ import Foundation
 class Twitter{
     
     let html:String!
-    
+
     init(twitterAppHtml:String){
         html = twitterAppHtml
     }
@@ -31,7 +31,7 @@ class Twitter{
             exit(1)
         }
         
-        let bodyNode   = parser.body
+        let bodyNode = parser.body
         var applicationDetail = [String:Any]()
         var application:[[String:Any]] = []
         
@@ -47,8 +47,27 @@ class Twitter{
         }
         return application
     }
-    
-    
+
+    func isRevokeTwitter(appId:String) -> Bool{
+        var err : NSError?
+        let option = CInt(HTML_PARSE_NOERROR.value | HTML_PARSE_RECOVER.value)
+        let parser     = HTMLParser(html: html, encoding: NSUTF8StringEncoding, option: option, error: &err)
+        if err != nil {
+            println(err)
+            exit(1)
+        }
+        
+        let bodyNode = parser.body
+        var applicationDetail = [String:Any]()
+        var application:[[String:Any]] = []
+
+        println(bodyNode?.findNodeById("\(appId)")?.getAttributeNamed("class"))
+        let targetClass = bodyNode?.findNodeById("\(appId)")?.getAttributeNamed("class")
+        println(targetClass?.hasSuffix("revoked"))
+
+        return true
+    }
+
     /**
     Twitter の Applicationデータ を取得する
     
@@ -62,9 +81,11 @@ class Twitter{
         
         // TODO Facebook
         println(node.findChildTagAttr("div", attrName: "class", attrValue: "FacebookConnect-title"))
-        
+
+        applicationDetail["is_revoke"] = false
         applicationDetail["name"] = node.findChildTag("strong")?.contents as String!
         applicationDetail["button_id"] = node.findChildTag("button")?.getAttributeNamed("id")
+        applicationDetail["app_id"] = node.findChildTagAttr("div", attrName: "class", attrValue: "stream-item oauth-application ")?.getAttributeNamed("id")
         applicationDetail["image"] = node.findChildTag("img")?.getAttributeNamed("src")
         applicationDetail["creater"] = node.findChildTagAttr("a", attrName: "class", attrValue: "oauth-organization")?.contents as String!
         applicationDetail["creater_href"] = node.findChildTagAttr("a", attrName: "class", attrValue: "oauth-organization")?.getAttributeNamed("href")

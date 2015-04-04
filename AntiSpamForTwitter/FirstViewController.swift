@@ -17,46 +17,47 @@ class FirstViewController: UIViewController,UITableViewDelegate,UITableViewDataS
     let myItems: NSArray = ["TEST1", "TEST2", "TEST3"]
     let PC_CHROME_UA = "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/28.0.1500.63 Safari/537.36"
     var defalutUA:String!
-//    var bouncingBalls : PQFBouncingBalls!
+    //    var bouncingBalls : PQFBouncingBalls!
     var myActivityIndicator: UIActivityIndicatorView!
     let myWebView : UIWebView = UIWebView()
-//    var myTable : UITableView!
+    //    var myTable : UITableView!
     var application:[[String:Any]] = [[:]]
+    var twitterAppView: UIWebView!
     
     @IBOutlet weak var TwitterWebView: UIWebView!
     @IBOutlet weak var TwitterTableView: UITableView!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         defalutUA = getDefaultUA()
         setWebViewParams()
         self.view.addSubview(TwitterWebView)
-//        createLoadingView()
-
+        //        createLoadingView()
+        
         setIndicatorParams()
         self.view.addSubview(myActivityIndicator)
     }
-
+    
     func setIndicatorParams(){
         myActivityIndicator = UIActivityIndicatorView()
         myActivityIndicator.frame = CGRectMake(0, 0, 50, 50)
         myActivityIndicator.center = self.view.center
-
+        
         // アニメーションが停止している時もインジケータを表示させる.
         myActivityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
-
+        
     }
-
+    
     func setTableViewParams(){
         TwitterTableView.delegate = self
         TwitterTableView.dataSource = self
-
+        
         var nib  = UINib(nibName: "TwitterAppTableViewCell", bundle:nil)
         TwitterTableView.registerNib(nib, forCellReuseIdentifier:"TwitterAppCell")
         TwitterTableView.estimatedRowHeight = 200.0
         TwitterTableView.rowHeight = UITableViewAutomaticDimension
-
+        
         TwitterTableView.reloadData()
     }
     
@@ -96,7 +97,7 @@ class FirstViewController: UIViewController,UITableViewDelegate,UITableViewDataS
     }
     
     func webViewDidStartLoad(webView: UIWebView) {
-//        bouncingBalls.show()
+        //        bouncingBalls.show()
         myActivityIndicator.startAnimating()
     }
     
@@ -113,14 +114,15 @@ class FirstViewController: UIViewController,UITableViewDelegate,UITableViewDataS
             println(currentUrl)
             switch currentUrl {
             case TwitterUrls.APPLICATIONS.rawValue :
+                twitterAppView = webView
                 let parsedTwitterAppHTML = Twitter(twitterAppHtml: body!)
                 application = parsedTwitterAppHTML.parseHtml()
                 println(application)
-
+                
                 myActivityIndicator.stopAnimating()
                 setTableViewParams()
                 self.view.addSubview(TwitterTableView)
-
+                
             case TwitterUrls.INDEX.rawValue :
                 accessApplicationURL()
             default:
@@ -130,20 +132,20 @@ class FirstViewController: UIViewController,UITableViewDelegate,UITableViewDataS
             }
         }
     }
-
+    
     func createLoadingView(){
-//        bouncingBalls = PQFBouncingBalls(loaderOnView: self.view)
-//        bouncingBalls.jumpAmount = 50
-//        bouncingBalls.loaderColor = UIColor.flatOrangeColor()
-//        let loadingLabel: UILabel = UILabel(frame: CGRectMake(0,0,200,50))
-//        loadingLabel.text = "Data Loading..."
-//        bouncingBalls.label = loadingLabel
-//        bouncingBalls.backgroundColor = UIColor.flatBelizeHoleColor()
+        //        bouncingBalls = PQFBouncingBalls(loaderOnView: self.view)
+        //        bouncingBalls.jumpAmount = 50
+        //        bouncingBalls.loaderColor = UIColor.flatOrangeColor()
+        //        let loadingLabel: UILabel = UILabel(frame: CGRectMake(0,0,200,50))
+        //        loadingLabel.text = "Data Loading..."
+        //        bouncingBalls.label = loadingLabel
+        //        bouncingBalls.backgroundColor = UIColor.flatBelizeHoleColor()
     }
     
     func accessApplicationURL(){
         changeUserAgentToPC()
-//        let myWeb: UIWebView = UIWebView()
+        //        let myWeb: UIWebView = UIWebView()
         let url: NSURL = NSURL(string: TwitterUrls.APPLICATIONS.rawValue)!
         let request: NSURLRequest = NSURLRequest(URL: url)
         myWebView.delegate = self
@@ -152,13 +154,13 @@ class FirstViewController: UIViewController,UITableViewDelegate,UITableViewDataS
         myWebView.loadRequest(request)
         self.view.addSubview(myWebView)
     }
-
+    
     /*
     Cellが選択された際に呼び出される.
     */
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-//        println("Num: \(indexPath.row)")
-//        println("Value: \(application[indexPath.row])")
+        //        println("Num: \(indexPath.row)")
+        //        println("Value: \(application[indexPath.row])")
     }
     
     /*
@@ -182,8 +184,8 @@ class FirstViewController: UIViewController,UITableViewDelegate,UITableViewDataS
         cell.dateLabel.text = application[indexPath.row]["allow_date"] as String!
         cell.revokeButton.addTarget(self, action: "buttonPressed:", forControlEvents: .TouchUpInside)
         cell.revokeButton.tag = indexPath.row;
-
-
+        
+        
         let url = NSURL(string: application[indexPath.row]["image"] as String!)
         cell.appImage.startLoaderWithTintColor(UIColor.flatNephritisColor())
         cell.appImage.sd_setImageWithURL(url, placeholderImage: nil, options: SDWebImageOptions.RefreshCached,
@@ -196,15 +198,39 @@ class FirstViewController: UIViewController,UITableViewDelegate,UITableViewDataS
             }
         )
         cell.setNeedsLayout()
-
+        
         return cell
     }
-
+    
     func changeButtonLoading(sender: UIButton!){
-        println(sender.titleLabel)
         sender.setTitle("Loading", forState: UIControlState.Normal)
+        let js = "document.body.innerHTML"
+        let body = twitterAppView.stringByEvaluatingJavaScriptFromString(js)
+        let appId = application[sender.tag]["app_id"] as String!
+        Twitter(twitterAppHtml: body!).isRevokeTwitter(appId!)
+        let twitterInfo = ["UIButton":sender]
+        var timer = NSTimer.scheduledTimerWithTimeInterval(0.5, target: self, selector: "onUpdate:", userInfo: twitterInfo, repeats: true)
     }
-
+    
+    //NSTimerIntervalで指定された秒数毎に呼び出されるメソッド.
+    func onUpdate(timer : NSTimer){
+        let js = "document.body.innerHTML"
+        let body = twitterAppView.stringByEvaluatingJavaScriptFromString(js)
+        let revokeButton = timer.userInfo?["UIButton"] as UIButton
+        let appId = application[revokeButton.tag]["app_id"] as String!
+        if Twitter(twitterAppHtml: body!).isRevokeTwitter(appId){
+            let btn = timer.userInfo?["UIButton"] as UIButton
+            if application[revokeButton.tag]["is_revoke"] as Bool {
+                application[revokeButton.tag]["is_revoke"] = false
+                btn.setTitle("解除", forState: UIControlState.Normal)
+            }else{
+                application[revokeButton.tag]["is_revoke"] = true
+                btn.setTitle("取消", forState: UIControlState.Normal)
+            }
+            timer.invalidate()
+        }
+    }
+    
     func buttonPressed(sender: UIButton!){
         println(application[sender.tag])
         let buttonId = application[sender.tag]["button_id"] as String!
@@ -213,7 +239,7 @@ class FirstViewController: UIViewController,UITableViewDelegate,UITableViewDataS
         println(click)
         changeButtonLoading(sender)
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
