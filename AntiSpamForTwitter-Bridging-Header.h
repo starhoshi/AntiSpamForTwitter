@@ -7,8 +7,8 @@
 //
 
 
-#ifndef AntiSpamForTwitter_AntiSpamForTwitter_Bridging_Header_h_h
-#define AntiSpamForTwitter_AntiSpamForTwitter_Bridging_Header_h_h
+#ifndef AntiSpamForTwitter_AntiSpamForTwitter_Bridging_Header_h
+#define AntiSpamForTwitter_AntiSpamForTwitter_Bridging_Header_h
 
 //#import <PQFCustomLoaders/PQFCustomLoaders.h>
 //#import <RJImageLoader/UIImageView+RJLoader.h>

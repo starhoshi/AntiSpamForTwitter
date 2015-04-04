@@ -54,7 +54,7 @@
 		E37855871ABDBAF3003AF77E /* Twitter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Twitter.swift; sourceTree = "<group>"; };
 		E3A367461AC6943000F46354 /* TwitterAppTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterAppTableViewCell.swift; sourceTree = "<group>"; };
 		E3A367471AC6943000F46354 /* TwitterAppTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TwitterAppTableViewCell.xib; sourceTree = "<group>"; };
-		E3F74D501ABED2590066AF20 /* AntiSpamForTwitter-Bridging-Header.h.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AntiSpamForTwitter-Bridging-Header.h.h"; sourceTree = SOURCE_ROOT; };
+		E3F74D501ABED2590066AF20 /* AntiSpamForTwitter-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AntiSpamForTwitter-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,7 +120,7 @@
 			isa = PBXGroup;
 			children = (
 				E33D6C891AB0960800D7A366 /* AppDelegate.swift */,
-				E3F74D501ABED2590066AF20 /* AntiSpamForTwitter-Bridging-Header.h.h */,
+				E3F74D501ABED2590066AF20 /* AntiSpamForTwitter-Bridging-Header.h */,
 				E33D6C8B1AB0960800D7A366 /* FirstViewController.swift */,
 				E33D6C8D1AB0960800D7A366 /* SecondViewController.swift */,
 				E33D6C8F1AB0960800D7A366 /* Main.storyboard */,
@@ -458,7 +458,7 @@
 				INFOPLIST_FILE = AntiSpamForTwitter/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "AntiSpamForTwitter-Bridging-Header.h.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "AntiSpamForTwitter-Bridging-Header.h";
 			};
 			name = Debug;
 		};
@@ -475,7 +475,7 @@
 				INFOPLIST_FILE = AntiSpamForTwitter/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "AntiSpamForTwitter-Bridging-Header.h.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "AntiSpamForTwitter-Bridging-Header.h";
 			};
 			name = Release;
 		};

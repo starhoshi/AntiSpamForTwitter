@@ -200,12 +200,18 @@ class FirstViewController: UIViewController,UITableViewDelegate,UITableViewDataS
         return cell
     }
 
+    func changeButtonLoading(sender: UIButton!){
+        println(sender.titleLabel)
+        sender.setTitle("Loading", forState: UIControlState.Normal)
+    }
+
     func buttonPressed(sender: UIButton!){
         println(application[sender.tag])
         let buttonId = application[sender.tag]["button_id"] as String!
         let js = "document.getElementById('\(buttonId)').click();"
         let click = myWebView.stringByEvaluatingJavaScriptFromString(js)
         println(click)
+        changeButtonLoading(sender)
     }
 
     override func didReceiveMemoryWarning() {
